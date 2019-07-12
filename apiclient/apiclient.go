@@ -129,6 +129,7 @@ func New(key string, httpClient external.Doer, limiter ratelimit.Limiter) Client
 // the relative path.
 func (c *client) dispatchAndUnmarshalWithUniquifier(ctx context.Context, r region.Region, m string, relativePath string, v url.Values, u string, dest interface{}) (*http.Response, error) {
 	res, err := c.dispatchMethod(ctx, r, m, relativePath, v, u)
+	defer res.Body.Close()
 	if err != nil {
 		return res, err
 	}
@@ -141,7 +142,7 @@ func (c *client) dispatchAndUnmarshalWithUniquifier(ctx context.Context, r regio
 	}
 
 	b, err := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+
 	res.Body = ioutil.NopCloser(bytes.NewReader(b))
 
 	// The body is in good state, so now we can return if there was an IO problem.
