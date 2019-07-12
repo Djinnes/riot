@@ -10,8 +10,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/yuhanfang/riot/constants/language"
-	"github.com/yuhanfang/riot/external"
+	"github.com/djinnes/riot/constants/language"
+	"github.com/djinnes/riot/external"
 )
 
 // Client requests static data from the data dragons endpoint. It is illegal to

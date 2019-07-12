@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/yuhanfang/riot/ratelimit"
-	"github.com/yuhanfang/riot/ratelimit/service/client"
-	"github.com/yuhanfang/riot/ratelimit/service/server"
+	"github.com/djinnes/riot/ratelimit"
+	"github.com/djinnes/riot/ratelimit/service/client"
+	"github.com/djinnes/riot/ratelimit/service/server"
 )
 
 func TestEndToEnd(t *testing.T) {

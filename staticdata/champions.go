@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/yuhanfang/riot/constants/language"
+	"github.com/djinnes/riot/constants/language"
 )
 
 type ChampionList struct {

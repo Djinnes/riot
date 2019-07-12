@@ -34,9 +34,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/djinnes/riot/ratelimit"
 	"github.com/gorilla/mux"
-	"github.com/nu7hatch/gouuid"
-	"github.com/yuhanfang/riot/ratelimit"
+	uuid "github.com/nu7hatch/gouuid"
 )
 
 const timeout = time.Minute

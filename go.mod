@@ -7,7 +7,6 @@ require (
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/mux v1.6.2
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
-	github.com/yuhanfang/riot v0.0.0-20190517224240-d702b0278701
 	go.opencensus.io v0.22.0 // indirect
 	golang.org/x/net v0.0.0-20190501004415-9ce7a6920f09
 	golang.org/x/oauth2 v0.0.0-20181203162652-d668ce993890
