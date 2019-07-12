@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/yuhanfang/riot/constants/queue"
-	"github.com/yuhanfang/riot/constants/region"
-	"github.com/yuhanfang/riot/constants/tier"
+	"github.com/djinnes/riot/constants/queue"
+	"github.com/djinnes/riot/constants/region"
+	"github.com/djinnes/riot/constants/tier"
 )
 
 type LeagueList struct {

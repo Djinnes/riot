@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/yuhanfang/riot/constants/region"
+	"github.com/djinnes/riot/constants/region"
 )
 
 type CurrentGameInfo struct {

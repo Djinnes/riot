@@ -14,11 +14,11 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/yuhanfang/riot/constants/champion"
-	"github.com/yuhanfang/riot/constants/queue"
-	"github.com/yuhanfang/riot/constants/region"
-	"github.com/yuhanfang/riot/external"
-	"github.com/yuhanfang/riot/ratelimit"
+	"github.com/djinnes/riot/constants/champion"
+	"github.com/djinnes/riot/constants/queue"
+	"github.com/djinnes/riot/constants/region"
+	"github.com/djinnes/riot/external"
+	"github.com/djinnes/riot/ratelimit"
 )
 
 // Client accesses the Riot API. Use New() to retrieve a valid instance.
