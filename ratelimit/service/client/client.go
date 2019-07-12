@@ -47,7 +47,7 @@ func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelim
 		return nil, nil, err
 	}
 	tok, err := ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	defer res.Body.Close()
 	if err != nil {
 		return nil, nil, err
 	}
