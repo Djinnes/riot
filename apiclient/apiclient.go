@@ -185,12 +185,12 @@ func (c *client) dispatchMethod(ctx context.Context, r region.Region, m string, 
 	req = req.WithContext(ctx)
 	req.Header.Add("X-Riot-Token", c.key)
 
-	done, _, err := c.r.Acquire(ctx, ratelimit.Invocation{
-		ApplicationKey: c.key,
-		Region:         strings.ToUpper(string(r)),
-		Method:         strings.ToLower(m),
-		Uniquifier:     uniquifier,
-	})
+	// done, _, err := c.r.Acquire(ctx, ratelimit.Invocation{
+	// 	ApplicationKey: c.key,
+	// 	Region:         strings.ToUpper(string(r)),
+	// 	Method:         strings.ToLower(m),
+	// 	Uniquifier:     uniquifier,
+	// })
 
 	if err != nil {
 		return nil, err
@@ -198,9 +198,9 @@ func (c *client) dispatchMethod(ctx context.Context, r region.Region, m string, 
 
 	// If either the done() or the HTTP request is an error, then return error.
 	res, err := c.c.Do(req)
-	derr := done(res)
-	if err == nil {
-		err = derr
-	}
+	// // derr := done(res)
+	// if err == nil {
+	// 	err = derr
+	// }
 	return res, err
 }
