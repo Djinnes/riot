@@ -196,7 +196,7 @@ func (c *client) dispatchMethod(ctx context.Context, r region.Region, m string, 
 		return nil, err
 	}
 
-	// If either the done() or the HTTP request is an error, then return error.
+	// If either the done() or the HTTP request is an error, theni return error.
 	res, err := c.c.Do(req)
 	derr := done(res)
 	if err == nil {
