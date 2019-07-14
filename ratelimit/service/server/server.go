@@ -79,6 +79,7 @@ func (s *server) HandleAcquire(w http.ResponseWriter, r *http.Request) {
 	}
 
 	done, cancel, err := s.limiter.Acquire(r.Context(), inv)
+	fmt.Println(key, region, method, uniquifier, noAppQuota, err)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
