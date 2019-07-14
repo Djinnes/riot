@@ -25,7 +25,7 @@ type client struct {
 // Acquire acquires quota for the given invocation. The caller must call done()
 // or cancel() within one minute of a successful call, or the quota will be
 // assumed to have been used, and will refresh after the maximum time.
-func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelimit.Done, ratelimit.Cancel, error) {
+func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (done func(res *http.Response) error, cancel func() error, err error) {
 	address := c.base.String() + "/acquire/" + inv.ApplicationKey + "/" + inv.Region
 	values := url.Values(make(map[string][]string))
 	if inv.Method != "" {
@@ -39,26 +39,25 @@ func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelim
 	}
 	req, err := http.NewRequest("POST", address, strings.NewReader(values.Encode()))
 	if err != nil {
-		return nil, nil, err
+		return
 	}
 	req = req.WithContext(ctx)
 	res, err := c.d.Do(req)
+	defer res.Body.Close()
 	err = getError(res, err)
 	if err != nil {
-		return nil, nil, err
+		return
 	}
 	tok, err := ioutil.ReadAll(res.Body)
-	defer res.Body.Close()
 	if err != nil {
-		return nil, nil, err
+		return
 	}
 	token := string(tok)
-	fmt.Println(tok)
-	done := func(res *http.Response) error {
+	done = func(res *http.Response) (err error) {
 		address := c.base.String() + "/done/" + token
 		req, err := http.NewRequest("POST", address, nil)
 		if err != nil {
-			return err
+			return
 		}
 		if res != nil {
 			req.Header = res.Header
@@ -66,22 +65,21 @@ func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelim
 		req = req.WithContext(ctx)
 		res, err = c.d.Do(req)
 		err = getError(res, err)
-		return err
+		return
 	}
-
-	cancel := func() error {
+	cancel = func() (err error) {
 		address := c.base.String() + "/cancel/" + token
 		req, err := http.NewRequest("POST", address, nil)
 		if err != nil {
-			return err
+			return
 		}
 		req = req.WithContext(ctx)
 		res, err = c.d.Do(req)
 		err = getError(res, err)
-		return err
+		return
 	}
-
-	return done, cancel, nil
+	fmt.Println(address, err)
+	return
 }
 
 // getError returns the error on bad response or if err is non-nil.
