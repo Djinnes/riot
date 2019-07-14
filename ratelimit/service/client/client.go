@@ -37,7 +37,6 @@ func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelim
 	if inv.NoAppQuota {
 		values.Add("noappquota", "T")
 	}
-	fmt.Println(values)
 	req, err := http.NewRequest("POST", address, strings.NewReader(values.Encode()))
 	if err != nil {
 		return nil, nil, err
@@ -54,7 +53,7 @@ func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelim
 		return nil, nil, err
 	}
 	token := string(tok)
-
+	fmt.Println(tok)
 	done := func(res *http.Response) error {
 		address := c.base.String() + "/done/" + token
 		req, err := http.NewRequest("POST", address, nil)
