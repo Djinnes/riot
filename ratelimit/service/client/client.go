@@ -27,6 +27,7 @@ type client struct {
 // assumed to have been used, and will refresh after the maximum time.
 func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelimit.Done, ratelimit.Cancel, error) {
 	address := c.base.String() + "/acquire/" + inv.ApplicationKey + "/" + inv.Region
+	fmt.Println(address)
 	values := url.Values(make(map[string][]string))
 	if inv.Method != "" {
 		values.Add("method", inv.Method)
@@ -79,9 +80,7 @@ func (c *client) Acquire(ctx context.Context, inv ratelimit.Invocation) (ratelim
 		err = getError(res, err)
 		return err
 	}
-
-	fmt.Println(err, address)
-
+	fmt.Println(address)
 	return done, cancel, nil
 }
 
